@@ -4,16 +4,20 @@ Linear regression from scratch with PyTorch: synthetic data, a manual gradient-d
 
 ## Setup
 
-```bash
-source .venv/bin/activate
-```
+Use the repo-root virtualenv (Python 3.12):
 
-PyTorch and pytest are already installed in `.venv`.
+```bash
+# from the ai-fluency repo root
+python3.12 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
 ## Train
 
 ```bash
-.venv/bin/python train.py
+# from this directory, after activating the root venv
+python train.py
 ```
 
 This fits `y ≈ Xw + b` on 512 examples with 8 features, then writes `metrics.json`.
@@ -21,7 +25,7 @@ This fits `y ≈ Xw + b` on 512 examples with 8 features, then writes `metrics.j
 ## Test
 
 ```bash
-.venv/bin/pytest test_train.py
+pytest test_train.py
 ```
 
 ## Metrics

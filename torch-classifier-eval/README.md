@@ -4,19 +4,21 @@ Deterministic three-class spiral classification with a small MLP, early stopping
 
 ## Setup
 
-Python 3.10+ is required. This project was run with Python 3.12:
+Python 3.10+ is required. Use the repo-root virtualenv (Python 3.12):
 
 ```bash
+# from the ai-fluency repo root
 python3.12 -m venv .venv
 source .venv/bin/activate
-pip install torch numpy pytest
+pip install -r requirements.txt
 ```
 
 ## Train and test
 
 ```bash
-.venv/bin/python train.py
-.venv/bin/pytest -q
+# from this directory, after activating the root venv
+python train.py
+pytest -q
 ```
 
 `train.py` writes `checkpoint.pt` and `metrics.json`. The checkpoint stores model state, optimizer state, the best epoch, seed, architecture parameters, and best validation loss. Reloading that file into a newly constructed model must reproduce the original logits on a fixed validation batch.
