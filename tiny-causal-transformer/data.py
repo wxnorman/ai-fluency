@@ -1,9 +1,17 @@
 import torch
 
+from torch.utils.data import DataLoader, TensorDataset
+
 BOS = 10
 SEP = 11
 EOS = 12
 VOCAB_SIZE = 13
+VOCABULARY = {
+    **{str(digit): digit for digit in range(10)},
+    "BOS": BOS,
+    "SEP": SEP,
+    "EOS": EOS,
+}
 
 SEQUENCE_LENGTH = 9
 CONTEXT_LENGTH = 8
@@ -49,3 +57,28 @@ def make_examples(
     loss_mask = torch.zeros_like(targets, dtype=torch.bool)
     loss_mask[:, 4:] = True
     return inputs, targets, loss_mask
+
+def make_data_loader(
+    sequences: torch.Tensor,
+    batch_size: int = 64,
+    shuffle: bool = True,
+    seed: int = 42,
+) -> DataLoader:
+    inputs, targets, loss_mask = make_examples(sequences)
+
+    dataset = TensorDataset(
+        inputs,
+        targets,
+        loss_mask,
+    )
+
+    generator = torch.Generator()
+    generator.manual_seed(seed)
+
+    return DataLoader(
+        dataset,
+        batch_size=batch_size,
+        shuffle=shuffle,
+        generator=generator,
+        num_workers=0,
+    )

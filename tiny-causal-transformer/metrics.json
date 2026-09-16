@@ -1,0 +1,30 @@
+{
+  "seed": 42,
+  "dataset_sizes": {
+    "train": 800,
+    "validation": 200,
+    "total": 1000
+  },
+  "best_epoch": 145,
+  "epochs_ran": 150,
+  "best_validation_loss": 1.4329292316688224e-05,
+  "teacher_forced": {
+    "loss": 1.4329292316688224e-05,
+    "token_accuracy": 1.0,
+    "exact_sequence_accuracy": 1.0
+  },
+  "generation": {
+    "token_accuracy": 1.0,
+    "exact_sequence_accuracy": 1.0
+  },
+  "parameter_count": 102272,
+  "diagnostic_loss": 1.4453080439125188e-05,
+  "gradient_norms": {
+    "token_embedding.weight": 3.726661645941931e-07,
+    "position_embedding.weight": 4.11871440064715e-07,
+    "blocks.0.attention.qkv_projection.weight": 1.5614715493939002e-06,
+    "output_projection.weight": 4.761365198646672e-05
+  },
+  "checkpoint_logits_match": true,
+  "elapsed_seconds": 8.896154875052162
+}

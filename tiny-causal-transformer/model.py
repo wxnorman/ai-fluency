@@ -301,3 +301,119 @@ class DecoderBlock(nn.Module):
             return x, probabilities
 
         return x
+
+
+class TinyCausalTransformer(nn.Module):
+    def __init__(
+        self,
+        vocab_size: int = 13,
+        context_length: int = 8,
+        d_model: int = 64,
+        n_heads: int = 4,
+        n_layers: int = 2,
+        d_ff: int = 256,
+        dropout: float = 0.1,
+    ) -> None:
+        super().__init__()
+
+        self.vocab_size = vocab_size
+        self.context_length = context_length
+        self.d_model = d_model
+        self.n_heads = n_heads
+        self.n_layers = n_layers
+        self.d_ff = d_ff
+        self.dropout_probability = dropout
+
+        self.token_embedding = nn.Embedding(
+            vocab_size,
+            d_model,
+        )
+
+        self.position_embedding = nn.Embedding(
+            context_length,
+            d_model,
+        )
+
+        self.embedding_dropout = nn.Dropout(dropout)
+
+        self.blocks = nn.ModuleList(
+            [
+                DecoderBlock(
+                    d_model=d_model,
+                    n_heads=n_heads,
+                    d_ff=d_ff,
+                    context_length=context_length,
+                    dropout=dropout,
+                )
+                for _ in range(n_layers)
+            ]
+        )
+
+        self.final_norm = nn.LayerNorm(d_model)
+
+        self.output_projection = nn.Linear(
+            d_model,
+            vocab_size,
+            bias=False,
+        )
+    
+    def configuration(self) -> dict:
+        return {
+            "vocab_size": self.vocab_size,
+            "context_length": self.context_length,
+            "d_model": self.d_model,
+            "n_heads": self.n_heads,
+            "n_layers": self.n_layers,
+            "d_ff": self.d_ff,
+            "dropout": self.dropout_probability,
+        }
+    
+    def forward(
+        self,
+        token_ids: torch.Tensor,
+        return_attention: bool = False,
+    ):
+        if token_ids.ndim != 2:
+            raise ValueError(
+                f"Expected token IDs with shape [B, T], "
+                f"got {token_ids.shape}"
+            )
+
+        batch_size, time = token_ids.shape
+
+        if time > self.context_length:
+            raise ValueError(
+                f"Sequence length {time} exceeds "
+                f"context length {self.context_length}"
+            )
+
+        positions = torch.arange(
+            time,
+            device=token_ids.device,
+        )
+
+        token_vectors = self.token_embedding(token_ids)
+        position_vectors = self.position_embedding(positions)
+
+        x = token_vectors + position_vectors
+        x = self.embedding_dropout(x)
+
+        attention_maps = []
+
+        for block in self.blocks:
+            if return_attention:
+                x, probabilities = block(
+                    x,
+                    return_attention=True,
+                )
+                attention_maps.append(probabilities)
+            else:
+                x = block(x)
+
+        x = self.final_norm(x)
+        logits = self.output_projection(x)
+
+        if return_attention:
+            return logits, attention_maps
+
+        return logits
