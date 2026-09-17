@@ -1,0 +1,58 @@
+{
+  "by_category": {
+    "addition": {
+      "format_compliance_rate": 0.0,
+      "format_compliant": 0,
+      "parse_failure_rate": 0.0,
+      "parse_failures": 0,
+      "semantic_accuracy": 1.0,
+      "semantic_correct": 2,
+      "total": 2
+    },
+    "multiplication": {
+      "format_compliance_rate": 0.0,
+      "format_compliant": 0,
+      "parse_failure_rate": 0.0,
+      "parse_failures": 0,
+      "semantic_accuracy": 1.0,
+      "semantic_correct": 2,
+      "total": 2
+    },
+    "negative_numbers": {
+      "format_compliance_rate": 0.0,
+      "format_compliant": 0,
+      "parse_failure_rate": 0.0,
+      "parse_failures": 0,
+      "semantic_accuracy": 0.0,
+      "semantic_correct": 0,
+      "total": 1
+    },
+    "order_of_operations": {
+      "format_compliance_rate": 0.5,
+      "format_compliant": 1,
+      "parse_failure_rate": 0.0,
+      "parse_failures": 0,
+      "semantic_accuracy": 0.0,
+      "semantic_correct": 0,
+      "total": 2
+    },
+    "subtraction": {
+      "format_compliance_rate": 1.0,
+      "format_compliant": 1,
+      "parse_failure_rate": 0.0,
+      "parse_failures": 0,
+      "semantic_accuracy": 0.0,
+      "semantic_correct": 0,
+      "total": 1
+    }
+  },
+  "overall": {
+    "format_compliance_rate": 0.25,
+    "format_compliant": 2,
+    "parse_failure_rate": 0.0,
+    "parse_failures": 0,
+    "semantic_accuracy": 0.5,
+    "semantic_correct": 4,
+    "total": 8
+  }
+}
