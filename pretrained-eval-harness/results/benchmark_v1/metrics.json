@@ -1,0 +1,156 @@
+{
+  "benchmark_sha256": "cd85dc904982f674663c7670c2c77e89c139b3529264d0c3e2d5fbb02b0ed09b",
+  "benchmark_version": "v1",
+  "by_category": {
+    "addition": {
+      "format_compliance_rate": 0.0,
+      "format_compliance_rate_ci95": [
+        0.0,
+        0.16112515805281938
+      ],
+      "format_compliant": 0,
+      "parse_failure_rate": 0.1,
+      "parse_failure_rate_ci95": [
+        0.027866481213768224,
+        0.3010336452284873
+      ],
+      "parse_failures": 2,
+      "semantic_accuracy": 0.7,
+      "semantic_accuracy_ci95": [
+        0.4810271816464765,
+        0.8545227551323956
+      ],
+      "semantic_correct": 14,
+      "total": 20
+    },
+    "multiplication": {
+      "format_compliance_rate": 0.05,
+      "format_compliance_rate_ci95": [
+        0.008881448800795402,
+        0.23613119344674205
+      ],
+      "format_compliant": 1,
+      "parse_failure_rate": 0.1,
+      "parse_failure_rate_ci95": [
+        0.027866481213768224,
+        0.3010336452284873
+      ],
+      "parse_failures": 2,
+      "semantic_accuracy": 0.85,
+      "semantic_accuracy_ci95": [
+        0.6395811352592431,
+        0.9476312541037835
+      ],
+      "semantic_correct": 17,
+      "total": 20
+    },
+    "precedence_parenthesized": {
+      "format_compliance_rate": 0.55,
+      "format_compliance_rate_ci95": [
+        0.34208534245034233,
+        0.7418021417443759
+      ],
+      "format_compliant": 11,
+      "parse_failure_rate": 0.3,
+      "parse_failure_rate_ci95": [
+        0.1454772448676043,
+        0.5189728183535235
+      ],
+      "parse_failures": 6,
+      "semantic_accuracy": 0.0,
+      "semantic_accuracy_ci95": [
+        0.0,
+        0.16112515805281938
+      ],
+      "semantic_correct": 0,
+      "total": 20
+    },
+    "precedence_standard": {
+      "format_compliance_rate": 0.05,
+      "format_compliance_rate_ci95": [
+        0.008881448800795402,
+        0.23613119344674205
+      ],
+      "format_compliant": 1,
+      "parse_failure_rate": 0.45,
+      "parse_failure_rate_ci95": [
+        0.2581978582556243,
+        0.6579146575496577
+      ],
+      "parse_failures": 9,
+      "semantic_accuracy": 0.05,
+      "semantic_accuracy_ci95": [
+        0.008881448800795402,
+        0.23613119344674205
+      ],
+      "semantic_correct": 1,
+      "total": 20
+    },
+    "subtraction_negative": {
+      "format_compliance_rate": 0.75,
+      "format_compliance_rate_ci95": [
+        0.531299122381256,
+        0.8881382985923343
+      ],
+      "format_compliant": 15,
+      "parse_failure_rate": 0.0,
+      "parse_failure_rate_ci95": [
+        0.0,
+        0.16112515805281938
+      ],
+      "parse_failures": 0,
+      "semantic_accuracy": 0.0,
+      "semantic_accuracy_ci95": [
+        0.0,
+        0.16112515805281938
+      ],
+      "semantic_correct": 0,
+      "total": 20
+    },
+    "subtraction_nonnegative": {
+      "format_compliance_rate": 0.4,
+      "format_compliance_rate_ci95": [
+        0.21880653237281705,
+        0.6134184992377469
+      ],
+      "format_compliant": 8,
+      "parse_failure_rate": 0.0,
+      "parse_failure_rate_ci95": [
+        0.0,
+        0.16112515805281938
+      ],
+      "parse_failures": 0,
+      "semantic_accuracy": 0.55,
+      "semantic_accuracy_ci95": [
+        0.34208534245034233,
+        0.7418021417443759
+      ],
+      "semantic_correct": 11,
+      "total": 20
+    }
+  },
+  "decoding": "greedy",
+  "model_id": "HuggingFaceTB/SmolLM2-360M-Instruct",
+  "overall": {
+    "format_compliance_rate": 0.3,
+    "format_compliance_rate_ci95": [
+      0.2252562422427457,
+      0.38715142432473576
+    ],
+    "format_compliant": 36,
+    "parse_failure_rate": 0.15833333333333333,
+    "parse_failure_rate_ci95": [
+      0.10376977359410051,
+      0.23409332345868022
+    ],
+    "parse_failures": 19,
+    "semantic_accuracy": 0.35833333333333334,
+    "semantic_accuracy_ci95": [
+      0.2781607905032006,
+      0.4472946399820988
+    ],
+    "semantic_correct": 43,
+    "total": 120
+  },
+  "prompt_version": "v2"
+}

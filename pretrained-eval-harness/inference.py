@@ -4,6 +4,23 @@ from dataclasses import dataclass
 
 MODEL_ID = "HuggingFaceTB/SmolLM2-360M-Instruct"
 
+DIRECT_PROMPT = (
+    "You are a calculator. Respond with exactly one base-10 integer. "
+    "Do not include an equation, explanation, units, punctuation, "
+    "or surrounding text."
+)
+CAREFUL_PROMPT = (
+    "You are a careful arithmetic solver. Before answering, apply "
+    "negative signs, parentheses, and standard order of operations. "
+    "Check the calculation, then return only the final integer."
+)
+HARD_EXAMPLES = (
+    ("What is 83 - 127?", "-44"),
+    ("What is 7 + 6 * 5?", "37"),
+    ("What is (7 + 6) * 5?", "65"),
+    ("What is -12 + 5?", "-7"),
+)
+
 @dataclass(frozen=True)
 class GenerationResult:
     raw_completion: str
@@ -21,15 +38,14 @@ def synchronize_device(device: torch.device) -> None:
     if device.type == "mps":
         torch.mps.synchronize()
 
-def build_messages(question: str) -> list[dict[str, str]]:
+def build_messages(
+    question: str,
+    system_prompt: str,
+) -> list[dict[str, str]]:
     return [
         {
             "role": "system",
-            "content": (
-                "You are a calculator. Respond with exactly one base-10 integer. "
-                "Do not include an equation, explanation, units, punctuation, "
-                "or surrounding text."
-            ),
+            "content": system_prompt,
         },
         {
             "role": "user",
@@ -46,11 +62,13 @@ def load_model(model_id: str, device: torch.device):
 
 def generate_completion(
     question: str,
+    system_prompt: str,
     tokenizer,
     model,
     device: torch.device,
+    max_new_tokens: int = 16,
 ) -> GenerationResult:
-    messages = build_messages(question)
+    messages = build_messages(question, system_prompt)
     model_inputs = tokenizer.apply_chat_template(
         messages,
         tokenize=True,
@@ -67,7 +85,7 @@ def generate_completion(
     with torch.inference_mode():
         output_ids = model.generate(
             **model_inputs,
-            max_new_tokens=16,
+            max_new_tokens=max_new_tokens,
             do_sample=False,
             pad_token_id=tokenizer.eos_token_id,
         )
@@ -102,6 +120,7 @@ def main() -> None:
     
     result = generate_completion(
         question="What is 17 + 28?",
+        system_prompt=DIRECT_PROMPT,
         tokenizer=tokenizer,
         model=model,
         device=device,

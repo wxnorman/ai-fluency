@@ -1,0 +1,15 @@
+{
+  "benchmark_version": "v1",
+  "category_counts": {
+    "addition": 20,
+    "multiplication": 20,
+    "precedence_parenthesized": 20,
+    "precedence_standard": 20,
+    "subtraction_negative": 20,
+    "subtraction_nonnegative": 20
+  },
+  "example_count": 120,
+  "examples_per_category": 20,
+  "generator_seed": 20260917,
+  "sha256": "cd85dc904982f674663c7670c2c77e89c139b3529264d0c3e2d5fbb02b0ed09b"
+}
